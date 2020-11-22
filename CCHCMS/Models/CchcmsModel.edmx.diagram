@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="697276713ad849aab80c2b47bbf6ffb7" Name="Diagram1">
+        <EntityTypeShape EntityType="CCHCMS_DBModel.AccessRequest" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.Appointment" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.Cours" Width="1.5" PointX="8.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.Diagnosi" Width="1.5" PointX="8.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.DoctorPatient" Width="1.5" PointX="7.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.DoctorSchedule" Width="1.5" PointX="5.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.Drug" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.HealthCard" Width="1.5" PointX="5.25" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.Pharmaceutical" Width="1.5" PointX="3.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.Prescription" Width="1.5" PointX="10.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.Role" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.Specialty" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.User" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.UsersInformation" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCHCMS_DBModel.BlockedUser" Width="1.5" PointX="5.25" PointY="22.5" IsExpanded="true" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_AccessRequests_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_Appointments_DoctorPatients" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_Appointments_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_Courses_Drugs" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_DoctorPatients_HealthCard" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_DoctorPatients_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_DoctorSchedules_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_Drugs_Pharmaceuticals" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_HealthCard_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_Prescription_HealthCard" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_Prescription_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_BlockedUsers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_UsersInformations_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.DoctorsCompounders" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.HospitalDoctors" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.PrescriptionCourses" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.PrescriptionDiagnosis" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.Specialist" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

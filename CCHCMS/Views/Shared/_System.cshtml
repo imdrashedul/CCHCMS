@@ -1,0 +1,165 @@
+﻿@helper renderMenu(string slug, string href, string title, string icon = "", string asset = "")
+{
+    string context = "<li>";
+    icon = icon.IsEmpty() ? "assets/img/it.png" : icon;
+    asset = asset.IsEmpty() ? Url.Content("~/Content/") : asset;
+    context += "<a href=\"" + Url.Content(href) + "\"" + (slug == ViewBag.ActiveMenu ? " class=\"active\"" : "") + ">";
+    context += "<img src=\"" + asset + icon + "\"> ";
+    context += title;
+    context += "</a>";
+    context += "</li>";
+    @Html.Raw(context);
+}
+
+@helper copyRight()
+{
+    string year = DateTime.Now.Year.ToString();
+    year = year == "2020" ? year : "2020-" + year;
+    @year;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CCHCMS | @ViewBag.Title </title>
+    <link rel="stylesheet" href="~/Content/assets/css/flatpickr.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/autocomplete.css">
+    @foreach (var extraCss in ViewBag.ExtraCss)
+    {
+        <link rel="stylesheet" href="@extraCss">
+    }
+    <link rel="stylesheet" href="~/Content/assets/css/styles.css">
+    <link rel="shortcut icon" href="~/Content/assets/img/fav.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html {
+            position: relative;
+            min-height: 100%;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="system">
+        <!-- SYSTEM HEADER -->
+        <nav class="navbar">
+            <div class="header">
+                <div class="left">
+                    <a class="logo" href="">
+                        <b><img src="~/Content/assets/img/logo-white-v2.png" alt="home" height="47px" width="200px"></b>
+                    </a>
+                </div>
+                <div class="right">
+                    <div class="usermenu drop">
+                        <div class="toggle">
+                            <img src="~/Content/assets/img/default_avatar.png" class="icon" alt="userimg" width="36px" height="36px">
+                            <b class="username">@ViewBag.LoggedUserInfo["fName"]</b>
+                            <span class="caret"></span>
+                        </div>
+                        <div class="content">
+                            <div class="userdetails">
+                                <div class="userimage">
+                                    <img src="~/Content/assets/img/default_avatar.png" alt="user">
+                                </div>
+                                <div class="usertext">
+                                    <h4>@ViewBag.LoggedUserInfo["fName"] @ViewBag.LoggedUserInfo["lName"]</h4>
+                                    <p class="text-muted">@ViewBag.LoggedUserInfo["email"]</p>
+                                    <a href="system/profile" class="btn target green"><span>View Profile</span></a>
+                                </div>
+                            </div>
+                            <div class="separator"></div>
+                            <div class="menu">
+                                <a href=""><img src="~/Content/assets/img/validation.png"> Validation <span class="label-validation">0</span></a>
+                            </div>
+                            <div class="separator"></div>
+                            <div class="menu">
+                                <a href="~/Logout"><img src="~/Content/assets/img/logout.png"> Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- SYSTEM SIDEBAR -->
+        <div class="sidebar" role="navigation">
+            <ul class="menu">
+                @renderMenu("dashboard", "~/Link", "Dashboard", "assets/img/dashboard.png")
+                <li class="divider"></li>
+                @renderMenu("patients", "~/Link", "Patients", "")
+            </ul>
+        </div>
+
+        <!-- SYSTEM MAIN -->
+        <div class="wrapper" role="application">
+            <div class="preloader">
+                <svg version="1.0" width="64px" height="64px" viewBox="0 0 128 128">
+                    <rect x="0" y="0" width="100%" height="100%" fill="#FFFFFF" />
+                    <g><path d="M64 9.75A54.25 54.25 0 0 0 9.75 64H0a64 64 0 0 1 128 0h-9.75A54.25 54.25 0 0 0 64 9.75z" fill="#0d8035" fill-opacity="1" /><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="1800ms" repeatCount="indefinite"></animateTransform></g>
+                </svg>
+            </div>
+            <div class="nav-horizontal">
+                <ul class="breadcrumb">
+                    @foreach (var navItem in ViewBag.Navigator)
+                    {
+                        <li><a href="@navItem[0]">@navItem[1]</a></li>
+                    }
+                    <li>@ViewBag.Title</li>
+                </ul>
+            </div>
+            <div class="main">
+                @RenderBody()
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="left"> &#0169; @copyRight() CCHCMS - All Rights Reserved </div>
+            <div class="right"> Developed By <b>Rashed</b> | <b> Sharif </b> | <b> Asif</b> | <b>Ratul</b> </div>
+        </footer>
+    </div>
+    <script type="text/javascript" src="~/Content/assets/js/flatpickr.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/ajax.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/script.js"></script>
+    <script type="text/javascript" src="~/Content/assets/js/autocomplete.js"></script>
+    @foreach (var extraJs in ViewBag.ExtraJs)
+    {
+        <script type="text/javascript" href="@extraJs"></script>
+    }
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('.preloader').classList.add('hidden');
+            document.querySelector('.drop .toggle').addEventListener('click', function (e) {
+                this.parentNode.classList.toggle("open");
+            });
+
+            window.onclick = function (e) {
+                var dropMenus = document.querySelectorAll('.drop.open');
+                dropMenus.forEach(function (menu) {
+                    if (!menu.contains(e.target)) {
+                        menu.classList.remove('open');
+                    }
+                });
+            };
+
+            var resizeWrapper = function () {
+                var offset = 70,
+                    height = ((window.innerHeight > 0) ? window.innerHeight : this.screen.height) - 1;
+                height -= offset;
+                height = height < 1 ? 1 : height;
+
+                if (height > offset) {
+                    document.querySelector('.system .wrapper').style = 'min-height: ' + height + 'px;';
+                }
+            };
+
+            resizeWrapper();
+
+            if (window.attachEvent) {
+                window.attachEvent('onresize', resizeWrapper);
+            } else if (window.addEventListener) {
+                window.addEventListener('resize', resizeWrapper);
+            }
+        });
+    </script>
+</body>
+</html>
