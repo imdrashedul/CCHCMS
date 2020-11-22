@@ -1,0 +1,48 @@
+﻿@{ 
+    Dictionary<string, string> errors = TempData.ContainsKey("loginValidation") ? (Dictionary<string, string>) TempData["loginValidation"] : null;
+    string userName = TempData.ContainsKey("loginUserName") ? TempData["loginUserName"].ToString() : "";
+}
+
+@helper previewError(Dictionary<string, string> errors, string hook, bool isLabel = false, string addonClass = "") { 
+    string context = "";
+    if (errors != null && errors.ContainsKey(hook))
+    {
+        context = isLabel ? " error" : "<img src=\"" + Url.Content("~/Content/assets/img/danger.png") + "\" width=\"12px\" height=\"12px\" alt=\"[+]\"> <span class=\"text-red " + addonClass + "\">" + errors[hook] + "</span>";
+    }
+    @Html.Raw(context);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CCHCMS - Login</title>
+    <link rel="stylesheet" href="~/Content/assets/css/styles.css">
+    <link rel="shortcut icon" href="~/Content/assets/img/fav.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="login">
+        <h2 class="logtitle" align="center">@Session["CCHCMS_TEMP"] Login to System</h2>
+        <div class="container">
+            @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+            <div class="inputset @previewError(errors, "username", true)">
+                @Html.Label("username", "User Name")<br>
+                @Html.TextBox("username", userName, new { id = "username", placeholder = "Enter Your User Name" })<br>
+                @previewError(errors, "username")
+            </div>
+            <div class="inputset @previewError(errors, "password", true)">
+                @Html.Label("password", "Password")<br>
+                @Html.Password("password", null, new { id = "password", placeholder = "Enter Your Password" })<br>
+                @previewError(errors, "password")
+            </div>
+                <input type="submit" value="Login">
+                <a href="javascript:void(0)" class="forgot-password">Forgot Password?</a>
+            }
+        </div>
+        <div class="log-footer">
+            Want to join as Hospital? <a href="">Create an Account</a>
+        </div>
+    </div>
+</body>
+</html>
