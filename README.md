@@ -11,7 +11,7 @@ Centralized Citizen's Health Care Management System
 
 -------------------------------------------------
 
-#Import database from 'Database.sql'
+# Import database from 'Database.sql'
 ### 1. Right click on 'Database'>'New Database'
 ### 2. Give database name 'CCHCMS_DB'
 ### 3. Right click on 'CCHCMS_DB'>'New Query'
