@@ -32,7 +32,6 @@ namespace CCHCMS.Controllers
             ViewBag.Navigator = new List<Array>();
             ViewBag.LoggedUser = loggedUser;
             ViewBag.LoggedUserInfo = MapUserInformation(loggedUser);
-
         }
 
         public RedirectToRouteResult Redirect()
