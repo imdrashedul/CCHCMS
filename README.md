@@ -1,8 +1,7 @@
 # CCHCMS
 Centralized Citizen's Health Care Management System
 
-# Clone Repo 
-### [git clone https://github.com/rashed370/CCHCMS.git]
+### Clone Repo [git clone https://github.com/rashed370/CCHCMS.git]
 ### 1. Web.config => CCHCMS/Web.config
 ### 2. Open solution
 ### 3. Right click on 'CCHCMS' and choose 'Unload'
