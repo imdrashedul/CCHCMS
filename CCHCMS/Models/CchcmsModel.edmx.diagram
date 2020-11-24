@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="697276713ad849aab80c2b47bbf6ffb7" Name="Diagram1">
+      <Diagram DiagramId="871e980e7f6a4e21b53600e9eb0e0527" Name="Diagram1">
         <EntityTypeShape EntityType="CCHCMS_DBModel.AccessRequest" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CCHCMS_DBModel.Appointment" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CCHCMS_DBModel.Cours" Width="1.5" PointX="8.25" PointY="1.75" IsExpanded="true" />
@@ -29,8 +29,8 @@
         <AssociationConnector Association="CCHCMS_DBModel.FK_DoctorPatients_Users" ManuallyRouted="false" />
         <AssociationConnector Association="CCHCMS_DBModel.FK_DoctorSchedules_Users" ManuallyRouted="false" />
         <AssociationConnector Association="CCHCMS_DBModel.FK_Drugs_Pharmaceuticals" ManuallyRouted="false" />
-        <AssociationConnector Association="CCHCMS_DBModel.FK_HealthCard_Users" ManuallyRouted="false" />
         <AssociationConnector Association="CCHCMS_DBModel.FK_Prescription_HealthCard" ManuallyRouted="false" />
+        <AssociationConnector Association="CCHCMS_DBModel.FK_Users_HealthCard" ManuallyRouted="false" />
         <AssociationConnector Association="CCHCMS_DBModel.FK_Prescription_Users" ManuallyRouted="false" />
         <AssociationConnector Association="CCHCMS_DBModel.FK_Users_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="CCHCMS_DBModel.FK_BlockedUsers_Users" ManuallyRouted="false" />

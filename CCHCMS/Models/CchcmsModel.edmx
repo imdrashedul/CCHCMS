@@ -91,7 +91,7 @@ warning 6002: The table/view 'CCHCMS_DB.dbo.DoctorsCompounders' does not have a 
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
           <Property Name="UserId" Type="bigint" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -326,18 +326,6 @@ warning 6002: The table/view 'CCHCMS_DB.dbo.Specialist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_HealthCard_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="HealthCard" Type="Self.HealthCard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HealthCard">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_HospitalDoctors_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="HospitalDoctors" Type="Self.HospitalDoctors" Multiplicity="*" />
@@ -455,6 +443,18 @@ warning 6002: The table/view 'CCHCMS_DB.dbo.Specialist' does not have a primary 
             </Principal>
             <Dependent Role="Specialist">
               <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_HealthCard">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="HealthCard" Type="Self.HealthCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HealthCard">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -578,10 +578,6 @@ warning 6002: The table/view 'CCHCMS_DB.dbo.Specialist' does not have a primary 
             <End Role="Pharmaceuticals" EntitySet="Pharmaceuticals" />
             <End Role="Drugs" EntitySet="Drugs" />
           </AssociationSet>
-          <AssociationSet Name="FK_HealthCard_Users" Association="Self.FK_HealthCard_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="HealthCard" EntitySet="HealthCard" />
-          </AssociationSet>
           <AssociationSet Name="FK_HospitalDoctors_Users" Association="Self.FK_HospitalDoctors_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="HospitalDoctors" EntitySet="HospitalDoctors" />
@@ -621,6 +617,10 @@ warning 6002: The table/view 'CCHCMS_DB.dbo.Specialist' does not have a primary 
           <AssociationSet Name="FK_Specialist_Users" Association="Self.FK_Specialist_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Specialist" EntitySet="Specialist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_HealthCard" Association="Self.FK_Users_HealthCard">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="HealthCard" EntitySet="HealthCard" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
             <End Role="Roles" EntitySet="Roles" />
@@ -714,11 +714,11 @@ warning 6002: The table/view 'CCHCMS_DB.dbo.Specialist' does not have a primary 
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="UserId" Type="Int64" Nullable="false" />
           <NavigationProperty Name="DoctorPatients" Relationship="Self.FK_DoctorPatients_HealthCard" FromRole="HealthCard" ToRole="DoctorPatients" />
-          <NavigationProperty Name="User" Relationship="Self.FK_HealthCard_Users" FromRole="HealthCard" ToRole="Users" />
           <NavigationProperty Name="Prescriptions" Relationship="Self.FK_Prescription_HealthCard" FromRole="HealthCard" ToRole="Prescription" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Users_HealthCard" FromRole="HealthCard" ToRole="Users" />
         </EntityType>
         <EntityType Name="Pharmaceutical">
           <Key>
@@ -781,7 +781,7 @@ warning 6002: The table/view 'CCHCMS_DB.dbo.Specialist' does not have a primary 
           <NavigationProperty Name="Appointments" Relationship="Self.FK_Appointments_Users" FromRole="Users" ToRole="Appointments" />
           <NavigationProperty Name="DoctorPatients" Relationship="Self.FK_DoctorPatients_Users" FromRole="Users" ToRole="DoctorPatients" />
           <NavigationProperty Name="DoctorSchedules" Relationship="Self.FK_DoctorSchedules_Users" FromRole="Users" ToRole="DoctorSchedules" />
-          <NavigationProperty Name="HealthCards" Relationship="Self.FK_HealthCard_Users" FromRole="Users" ToRole="HealthCard" />
+          <NavigationProperty Name="HealthCards" Relationship="Self.FK_Users_HealthCard" FromRole="Users" ToRole="HealthCard" />
           <NavigationProperty Name="Prescriptions" Relationship="Self.FK_Prescription_Users" FromRole="Users" ToRole="Prescription" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
           <NavigationProperty Name="BlockedUsers" Relationship="Self.FK_BlockedUsers_Users" FromRole="Users" ToRole="BlockedUsers" />
@@ -907,18 +907,6 @@ warning 6002: The table/view 'CCHCMS_DB.dbo.Specialist' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_HealthCard_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="HealthCard" Type="Self.HealthCard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HealthCard">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Prescription_HealthCard">
           <End Role="HealthCard" Type="Self.HealthCard" Multiplicity="1" />
           <End Role="Prescription" Type="Self.Prescription" Multiplicity="*" />
@@ -928,6 +916,18 @@ warning 6002: The table/view 'CCHCMS_DB.dbo.Specialist' does not have a primary 
             </Principal>
             <Dependent Role="Prescription">
               <PropertyRef Name="HCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_HealthCard">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="HealthCard" Type="Self.HealthCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HealthCard">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1048,13 +1048,13 @@ warning 6002: The table/view 'CCHCMS_DB.dbo.Specialist' does not have a primary 
             <End Role="Pharmaceuticals" EntitySet="Pharmaceuticals" />
             <End Role="Drugs" EntitySet="Drugs" />
           </AssociationSet>
-          <AssociationSet Name="FK_HealthCard_Users" Association="Self.FK_HealthCard_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="HealthCard" EntitySet="HealthCards" />
-          </AssociationSet>
           <AssociationSet Name="FK_Prescription_HealthCard" Association="Self.FK_Prescription_HealthCard">
             <End Role="HealthCard" EntitySet="HealthCards" />
             <End Role="Prescription" EntitySet="Prescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_HealthCard" Association="Self.FK_Users_HealthCard">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="HealthCard" EntitySet="HealthCards" />
           </AssociationSet>
           <AssociationSet Name="FK_Prescription_Users" Association="Self.FK_Prescription_Users">
             <End Role="Users" EntitySet="Users" />
